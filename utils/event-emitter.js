@@ -1,5 +1,6 @@
 class EventEmitter {
     constructor() {
+        // Храним события в виде Map<Event, Set<callback>>
         this.events = new Map();
     };
 
@@ -14,6 +15,7 @@ class EventEmitter {
     
     //  Отписка от события с коллбэком cb
     unsubscribe(event, cb) {
+        //  Проверяем, что событие существует
         if (!this.events.has(event)) {
             return;
         }
@@ -23,6 +25,7 @@ class EventEmitter {
 
     //  Вызов всех коллбэков события
     emit(event, ...args) {
+        //  Проверяем, что событие существует
         if (!this.events.has(event)) {
             return;
         }
