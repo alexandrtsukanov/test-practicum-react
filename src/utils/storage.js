@@ -7,7 +7,7 @@ class Storage {
         this.callbacks = new Map();
     }
 
-    subscribe(callback) {
+    subscribe = (callback) => {
         // Генерируем уникальный ключ для словаря коллбэков
         const key = Symbol();
 
@@ -22,11 +22,11 @@ class Storage {
         }
     }
 
-    getState() {
+    getState = () => {
         return this.state;
     };
 
-    addTodo(todo) {
+    addTodo = (todo) => {
         this.state = {
             ...this.state,
             todos: [...this.state.todos, todo],
@@ -34,7 +34,7 @@ class Storage {
         this.notify();
     }
 
-    incrementCount() {
+    incrementCount = () => {
         this.state = {
             ...this.state,
             count: this.state.count + 1,
@@ -42,7 +42,7 @@ class Storage {
         this.notify();
     }
 
-    decrementCount() {
+    decrementCount = () => {
         this.state = {
             ...this.state,
             count: this.state.count - 1,
@@ -51,7 +51,7 @@ class Storage {
     }
     
     // При любом обновлении стора уведомляем подписчиков
-    notify() {
+    notify = () => {
         this.callbacks.forEach(callback => {
             callback();
         });

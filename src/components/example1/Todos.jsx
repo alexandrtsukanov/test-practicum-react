@@ -23,8 +23,8 @@ function Todos() {
     return (
         <>
             <div>
-                {todos.map((title, id) => (
-                    <span key={id}>{title}</span>
+                {todos.map(({ title, id }) => (
+                    <div key={id}>{title}</div>
                 ))}
             </div>
             
