@@ -21,44 +21,7 @@ class TimerStore {
 
     getState = () => this.seconds;
 
-    start = () => {
-        if (this.status === 'STARTED') return;
-
-        this.seconds = 0;
-        this.savedSeconds = 0;
-
-        this.call();
-
-        const timer = setInterval(() => {
-            this.seconds += 1;
-            this.savedSeconds += 1;
-            this.call();
-        }, 1000);
-
-        this.timer = timer;
-        this.status = 'STARTED';
-    }
-
-    reset = () => {
-        clearInterval(this.timer);
-        this.timer = null;
-        this.seconds = 0;
-        this.savedSeconds = 0;
-        this.status = 'RESET';
-        this.call();
-    }
-    
-    pause = () => {
-        clearInterval(this.timer);
-        this.timer = null;
-        this.seconds = this.savedSeconds;
-        this.status = 'PAUSED';
-        this.call();;
-    }
-
-    resume = () => {
-        if (this.status !== 'PAUSED') return;
-
+    launchTimer() {
         const timer = setInterval(() => {
             this.seconds += 1;
             this.savedSeconds += 1;
@@ -66,8 +29,43 @@ class TimerStore {
         }, 1000);
 
         this.timer = timer;
-
         this.status = 'STARTED';
+    }
+
+    stopTimer() {
+        clearInterval(this.timer);
+        this.timer = null;
+    }
+
+    start = () => {
+        if (this.status === 'STARTED') return;
+
+        this.seconds = 0;
+        this.savedSeconds = 0;
+
+        this.call();
+        this.launchTimer();
+    }
+
+    reset = () => {
+        this.stopTimer();
+        this.seconds = 0;
+        this.savedSeconds = 0;
+        this.status = 'RESET';
+        this.call();
+    }
+    
+    pause = () => {
+        this.stopTimer();
+        this.seconds = this.savedSeconds;
+        this.status = 'PAUSED';
+        this.call();
+    }
+
+    resume = () => {
+        if (this.status !== 'PAUSED') return;
+
+        this.launchTimer();
     }
 
     call() {

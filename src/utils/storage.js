@@ -50,7 +50,7 @@ class Storage {
         this.notify();
     }
     
-    // При любом обновлении стора уведомляем подписчиков
+    // При любом обновлении состояния вызываем все коллбэки
     notify = () => {
         this.callbacks.forEach(callback => {
             callback();
