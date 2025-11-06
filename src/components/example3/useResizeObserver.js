@@ -24,8 +24,6 @@ export const useResizeObserver = (ref) => {
 
     // Получение размеров через useSyncExternalStore
     const dimensions = useSyncExternalStore(subscribe, getSize);
-    console.log(dimensions)
-
 
     return dimensions;
 }
