@@ -1,6 +1,6 @@
 import { useState, useSyncExternalStore } from "react";
 
-// Создадим кастомный хук useResizeObserver, который будет в текущий момент времени вычислять размеры переданного в него HTML-элемента в виде ref
+// Создадим кастомный хук useResizeObserver, который будет в текущий момент времени вычислять ширину и высоту переданного в него в виде ref HTML-элемента
 export const useResizeObserver = (ref) => {
     const [size, setSize] = useState({ height: 0, width: 0 });
 
